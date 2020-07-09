@@ -35,15 +35,16 @@ let vm = new Vue({
 })
 ```
 ##### 答：
+
 1. 如上代码 clickHandler 函数设置的 this.dog.name 不是响应式的。
 2. Vue响应式内部原理为 Vue实例化时遍历 data 对象的属性，把data对象中每一个可枚举属性 用 Object.defineProperty() 方法挂载到 vue实例上，并且修改属性的 get、set 方法。get、set实际处理为 vue实例的$data对象（及data对象）。   实现this.xxx访问data对象属性。
 
-vue实例 $data 对象同上 为每一个可枚举属性 用 Object.defineProperty() 方法修改属性的get、set方法。
+    vue实例 $data 对象同上 为每一个可枚举属性 用 Object.defineProperty() 方法修改属性的get、set方法。
 
-如果属性值为对象，则把属性值对象也做同样处理。
+    如果属性值为对象，则把属性值对象也做同样处理。
 
-被修改过get、set方法的属性在发生变化时，如果新的值为对象类型，则把属性也同样如上设置为响应式属性。然后触发notify(), 更新试图。
+    被修改过get、set方法的属性在发生变化时，如果新的值为对象类型，则把属性也同样如上设置为响应式属性。然后触发notify(), 更新试图。
 
-由上可知，响应式数据是在 vue 实例构造函数中注册的。
+    由上可知，响应式数据是在 vue 实例构造函数中注册的。
 
-如果想要实现 上面代码 设置新成员为响应式 可以 重新复制 dog 属性
+    如果想要实现 上面代码 设置新成员为响应式 可以 重新复制 dog 属性
