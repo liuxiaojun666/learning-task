@@ -8,7 +8,7 @@ C. 虚拟 DOM 可以维护程序的状态，通过对比两次状态的差异更
 
 D. 虚拟 DOM 本质上是 JavaScript 对象，可以跨平台，例如服务器渲染、Weex 开发等。
 
-#### 2、下面关于 Snabbdom 库的描述错误的是：（D）
+#### 2、下面关于 Snabbdom 库的描述错误的是：（C D）
 A. Snabbdom 库是一个高效的虚拟 DOM 库，Vue.js 的虚拟 DOM 借鉴了 Snabbdom 库。
 
 B. 使用 h() 函数创建 VNode 对象，描述真实 DOM 结构。
