@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function * main () {
+            try {
+                console.log(1)
+                const r1 = yield ajax('/api/users/list')
+
+                console.log(2)
+                const r1 = yield ajax('/api/users/list')
+
+                console.log(3)
+                const r1 = yield ajax('/api/users/list')
+            } catch (err) {
+                console.log(err)
+            }
+        }
+
+        function co (generator) {
+            const g = generator()
+            return function handleResult (result) {
+                if (result.done) return
+                result.value.then(
+                    data => handleResult(g.next(data)),
+                    errer => g.throw(errer)
+                )
+            }
+            handleResult(g.next())
+        }
+    </script>
+</body>
+</html>
