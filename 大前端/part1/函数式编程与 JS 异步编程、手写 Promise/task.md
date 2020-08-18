@@ -14,7 +14,7 @@ JS中宏任务是消息队列中的回调，排队等待执行。微任务放在
 
 ### 代码题
 
-一、将下面异步代码使用Promise的方式改进
+#### 一、将下面异步代码使用Promise的方式改进
 ``` js
 setTimeout(function () {
     var a = 'hello'
@@ -38,7 +38,7 @@ setTimeout(function () {
 })()
 ```
 
-二、基于以下代码完成下面的四个练习。
+#### 二、基于以下代码完成下面的四个练习。
 
 ``` js
 const fp = require('lodash/fp')
@@ -52,7 +52,7 @@ const cars = [
     {name: 'Pagani Huayra', horsepower: 960, dollar_value: 3000, in_stock: true},
 ]
 ```
-练习1：使用函数组合 fp.flowRight() 重新实现下面这个函数
+##### 练习1：使用函数组合 fp.flowRight() 重新实现下面这个函数
 ``` js
 let isLastInstock = function (cars) {
     let last_car = fp.last(cars)
@@ -70,13 +70,13 @@ let isLastInstock = function (cars) {
 console.log('练习1：', isLastInstock(cars))
 ```
 
-练习2：使用 fp.flowRight()、fp.prop() 和 fp.first() 获取第一个 car 的 name 
+##### 练习2：使用 fp.flowRight()、fp.prop() 和 fp.first() 获取第一个 car 的 name 
 ``` js
 
 console.log('练习2：', fp.flowRight(fp.prop('name'), fp.first)(cars))
 ```
 
-练习3：使用帮助函数 _average 重构 averageDollarValue, 使用函数组合的方式实现
+##### 练习3：使用帮助函数 _average 重构 averageDollarValue, 使用函数组合的方式实现
 ``` js
 let _average = function (xs) {
     return fp.reduce(fp.add, 0, xs) / xs.length
@@ -103,7 +103,7 @@ let averageDollarValue = function (cars) {
 console.log('练习3：', averageDollarValue(cars))
 ```
 
-练习4：使用 flowRight 写一个 sanitizeNames() 函数，返回一个下划线链接的小写字符串，把数组中的name 转换为这种形式：例如： sanitizeNames(['Hello World']) => ["hello world"]
+##### 练习4：使用 flowRight 写一个 sanitizeNames() 函数，返回一个下划线链接的小写字符串，把数组中的name 转换为这种形式：例如： sanitizeNames(['Hello World']) => ["hello world"]
 ``` js
 let _underscore = fp.replace(/\W+/g, '_')
 ```
@@ -117,4 +117,9 @@ function sanitizeNames(names) {
 
 console.log('练习4：', sanitizeNames(fp.map(fp.prop('name'), cars)))
 ```
+
+
+#### 基于下面提供的代码，完成后续的四个练习
+
+
 
