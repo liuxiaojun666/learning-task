@@ -10,7 +10,7 @@ EventLoop 用来监听调用栈与消息队列，当调用栈为空时，就会�
 
 消息队列存放的就像是异步执行的回调函数，在异步任务完成后讲回调函数插入消息队列，排队等候执行。
 
-JS中宏任务是消息队列中的回调，排队等待执行。微任务在当前宏任务执行完后立即执行。微任务比宏任务优先执行。JS中宏任务有，setTimeout setInterval，微任务有process.nextTick、Promise.resolve、MutationObserver、queueMicrotask
+JS中宏任务是消息队列中的回调，排队等待执行。微任务放在当前宏任务执行完后立即执行的微任务队列。微任务比宏任务优先执行。JS中宏任务有，setTimeout setInterval，微任务有process.nextTick、Promise.resolve、MutationObserver、queueMicrotask
 
 ### 代码题
 
@@ -66,11 +66,14 @@ let isLastInstock = function (cars) {
     // return fp.prop('in_stock', last_car)
     return fp.flowRight(fp.prop('in_stock'), fp.last)(cars)
 }
+
+console.log('练习1：', isLastInstock(cars))
 ```
 
 练习2：使用 fp.flowRight()、fp.prop() 和 fp.first() 获取第一个 car 的 name 
 ``` js
-fp.flowRight(fp.prop('name'), fp.first)(cars)
+
+console.log('练习2：', fp.flowRight(fp.prop('name'), fp.first)(cars))
 ```
 
 练习3：使用帮助函数 _average 重构 averageDollarValue, 使用函数组合的方式实现
@@ -93,14 +96,11 @@ let _average = function (xs) {
     return fp.reduce(fp.add, 0, xs) / xs.length
 }
 let averageDollarValue = function (cars) {
-    // let dollar_values = fp.map(function (car) {
-    //     return car.dollar_value
-    // }, cars)
-
-    // return _average(dollar_values)
-
     return fp.flowRight(_average, fp.map(car => car.dollar_value))(cars)
+    // return fp.flowRight(fp.reduce(fp.add, 0), fp.map(car => car.dollar_value))(cars) / cars.length
 }
+
+console.log('练习3：', averageDollarValue(cars))
 ```
 
 练习4：使用 flowRight 写一个 sanitizeNames() 函数，返回一个下划线链接的小写字符串，把数组中的name 转换为这种形式：例如： sanitizeNames(['Hello World']) => ["hello world"]
@@ -111,10 +111,10 @@ let _underscore = fp.replace(/\W+/g, '_')
 ``` js
 let _underscore = fp.replace(/\W+/g, '_')
 
-function sanitizeNames (names) {
-    return fp.map(fp.flowRight(_underscore, fp.tolower), names)
+function sanitizeNames(names) {
+    return fp.map(fp.flowRight(_underscore, fp.toLower), names)
 }
 
-sanitizeNames(fp.map(car => car.name, cars))
+console.log('练习4：', sanitizeNames(fp.map(fp.prop('name'), cars)))
 ```
 
